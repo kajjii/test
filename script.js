@@ -36,6 +36,7 @@ async function getPosts() {
 
     let posts = document.querySelector(".posts")
 
+    // Отрисовываешь
     data.forEach((post) => {
         posts.innerHTML += `
                 <div class="post">
@@ -45,17 +46,6 @@ async function getPosts() {
                 </div>
             `
     })
-
-    // Отрисовываешь
-    // for (let key of data) {
-    //     posts.innerHTML += `
-    //             <div class="post">
-    //                 <h3>${key.title}</h3>
-    //                 <div class="body">${key.body}</div>
-    //                 <button>Удалить</button>
-    //             </div>
-    //         `
-    // }
 }
 
 getPosts()
