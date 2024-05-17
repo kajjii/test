@@ -1,57 +1,61 @@
-// async function getPosts() {
-//    let response = await fetch('https://jsonplaceholder.typicode.com/posts')
-//    let data = await response.json()
-//    data = data.splice(0, 15)
+/** ----------------1----------------------
+ * Разобраться с импортами/экспортами. Сделать так, чтобы
+ * функцию fetchData можно было использовать в двух файлах:
+ * page-photos.js и script.js
+ */
 
-//    let posts = document.querySelector('.posts')
-   
-//    data.forEach(post => {
-//         posts.append(post)
-//    });
-// }
+/** -------------------2---------------
+ * Сделать удаление постов из DOM
+ */
 
-// getPosts()
+/** -----------------3--------------
+ * Переделать циклы в обычный forEach/map
+ */
 
+/**
+ * Разберись с темой, что такое мутация в языках программирования, например, js
+ * приведи пример с объяснениями
+ */
+
+async function fetchData(url) {
+    try {
+        let response = await fetch(url)
+
+        return await response.json()
+    } catch (err) {
+        return []
+    }
+}
+
+//! ПРОАНАЛИЗИРУЙ
 async function getPosts() {
-       let response = await fetch('https://jsonplaceholder.typicode.com/posts')
-       let data = await response.json()
-       data = data.splice(0, 15)
-    
-       let posts = document.querySelector('.posts')
+    // Получаешь данные
+    let data = await fetchData("https://jsonplaceholder.typicode.com/posts")
 
-       let key;
+    data.splice(0, 15)
 
-       for (key in data){
+    let posts = document.querySelector(".posts")
 
-            posts.innerHTML += `
+    data.forEach((post) => {
+        posts.innerHTML += `
                 <div class="post">
-                    <h3>${data[key].title}</h3>
-                    <div class="body">${data[key].body}</div>
+                    <h3>${post.title}</h3>
+                    <div class="body">${post.body}</div>
+                    <button>Удалить</button>
                 </div>
             `
-            data[key]
-       }
-    }
+    })
+
+    // Отрисовываешь
+    // for (let key of data) {
+    //     posts.innerHTML += `
+    //             <div class="post">
+    //                 <h3>${key.title}</h3>
+    //                 <div class="body">${key.body}</div>
+    //                 <button>Удалить</button>
+    //             </div>
+    //         `
+    // }
+}
+
 getPosts()
-
-async function getPhotos() {
-    let response = await fetch('https://jsonplaceholder.typicode.com/photos')
-    let data = await response.json()
-    data = data.splice(0, 15)
- 
-    let photos = document.querySelector('.photos')
-
-    let key;
-
-    for (key in data){
-
-        photos.innerHTML += `
-            <div class="photo">
-                <h3>${data[key].title}</h3>
-                <img src= "${data[key].url}" </img>
-            </div>
-        `
-        data[key]
-   }
-}  
- getPhotos()
